@@ -13,7 +13,7 @@ const { Header } = Layout;
 /**
  * 主要定义了头部区域在手机端或布局为顶部菜单时的宽度
  * 还定义了一些方法，如对消息操作的方法
- * 还有定义了点击头像区域时对不同页面的跳转
+ * 还定义了点击头像区域时对不同页面的跳转
  * 如果是顶部菜单且不是手机端时引入TopNavHeader组件
  * 如果是手机端且是顶部菜单时，引入GlobalHeader组件
  */
@@ -106,16 +106,6 @@ class HeaderView extends Component {
         }
     };
 
-    // 消息功能弹出tab的显示与隐藏
-    handleNoticeVisibleChange = visible => {
-        if (visible) {
-            const { dispatch } = this.props;
-            dispatch({
-                type: 'global/fetchNotices',
-            });
-        }
-    };
-
     // 当页面滚动时，且设置了自动隐藏菜单时的回调
     handScroll = () => {
         const { autoHideHeader } = this.props;
@@ -188,12 +178,12 @@ class HeaderView extends Component {
 }
 
 export default connect(({
-    // user,
+    user,
     global,
     setting,
     loading
 }) => ({
-    //currentUser: user.currentUser,
+    currentUser: user.currentUser,
     collapsed: global.collapsed,
     fetchingMoreNotices: loading.effects['global/fetchMoreNotices'],
     fetchingNotices: loading.effects['global/fetchNotices'],

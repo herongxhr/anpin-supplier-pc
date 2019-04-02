@@ -12,11 +12,10 @@ const { check } = Authorized;
 function formatter(data, parentAuthority, parentName) {
     return data
         .map(item => {
-            // 没有name或没有path属性都不行
+            // 没有name或没有path属性都不是菜单数据
             if (!item.name || !item.path) {
                 return null;
             }
-
             let locale = 'menu';
             if (parentName) {
                 locale = `${parentName}.${item.name}`;
@@ -30,13 +29,15 @@ function formatter(data, parentAuthority, parentName) {
             const name = menu.disableLocal
                 ? item.name
                 : formatMessage({ id: locale, defaultMessage: item.name });
+            // 格式化item内的数据，根据配置重定义name/locale
+            // 增加authority属性，优先用自己的，没有用父亲的
             const result = {
                 ...item,
                 name,
                 locale,
                 authority: item.authority || parentAuthority,
             };
-            if (item.routes) {
+            if (item.routes) {// 递归
                 const children = formatter(item.routes, item.authority, locale);
                 // Reduce memory usage
                 result.children = children;
@@ -51,6 +52,7 @@ const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
 /**
  * get SubMenu or Item
+ * 获取子菜单或子菜单项
  */
 const getSubMenu = item => {
     // doc: add hideChildrenInMenu
@@ -65,7 +67,7 @@ const getSubMenu = item => {
 
 /**
  * filter menuData
- * 过滤菜单数据
+ * 过滤菜单数据数组
  * 1.如果空数据返回空数组
  * 2.如果菜单项没有name属性也不要
  * 3.菜单项是隐藏的也不要
@@ -87,7 +89,6 @@ const filterMenuData = menuData => {
  */
 const getBreadcrumbNameMap = menuData => {
     const routerMap = {};
-
     const flattenMenuData = data => {
         data.forEach(menuItem => {
             if (menuItem.children) {
@@ -105,7 +106,6 @@ const memoizeOneGetBreadcrumbNameMap = memoizeOne(getBreadcrumbNameMap, isEqual)
 
 export default {
     namespace: 'menu',
-
     state: {
         menuData: [],
         routerData: [],

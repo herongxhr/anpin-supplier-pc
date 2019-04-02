@@ -7,7 +7,7 @@ import styles from './index.less';
 import { title } from '../../defaultSettings';
 
 /**
- * 这个组件主要是引进了BaseMenu组件，菜单的真正数据是在那里定义的
+ * 这个组件主要是引进了BaseMenu组件，菜单的显示是在那里定义的
  * 另外引入了RightContent区域，这个就是顶部菜单旁边的一排小图标
  * 有消息，图像，搜索，多语言等
  */
@@ -29,24 +29,19 @@ export default class TopNavHeader extends PureComponent {
         const flatMenuKeys = getFlatMenuKeys(menuData);
         return (
             <div className={`${styles.head} ${theme === 'light' ? styles.light : ''}`}>
-                <div
-                    ref={ref => {
-                        this.maim = ref;
-                    }}
-                    className={`${styles.main} ${contentWidth === 'Fixed' ? styles.wide : ''}`}
-                >
+                {/* 这个容器包括右侧图标导航区 */}
+                <div ref={ref => { this.maim = ref; }}
+                    className={`${styles.main} ${contentWidth === 'Fixed' ? styles.wide : ''}`}>
                     <div className={styles.left}>
+                    {/* logo区 */}
                         <div className={styles.logo} key="logo" id="logo">
                             <Link to="/">
                                 <img src={logo} alt="logo" />
                                 <h1>{title}</h1>
                             </Link>
                         </div>
-                        <div
-                            style={{
-                                maxWidth,
-                            }}
-                        >
+                        {/* 菜单区 */}
+                        <div style={{ maxWidth }}>
                             <BaseMenu {...this.props} flatMenuKeys={flatMenuKeys} className={styles.menu} />
                         </div>
                     </div>

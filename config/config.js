@@ -39,6 +39,21 @@ export default {
     theme: {
         'primary': defaultSettings.primaryColor,
     },
+    // externals: {
+    //     '@antv/data-set': 'DataSet',
+    //     bizcharts: 'BizCharts',
+    // },
+    // proxy: {
+    //     "/supplier/": {
+    //         target: "http://anpin.jgzh.test/",
+    //         changeOrigin: true
+    //     },
+    //     '/server/api/': {
+    //         target: 'http://anpin.jgzh.test/',
+    //         changeOrigin: true,
+    //         pathRewrite: { '^/server': '' },
+    //     },
+    // },
     lessLoaderOptions: {
         javascriptEnabled: true,
     },

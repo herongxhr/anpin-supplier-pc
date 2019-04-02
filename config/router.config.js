@@ -3,11 +3,17 @@ export default [
         path: '/',
         component: '../layouts/BasicLayout',
         routes: [
-            { path: '/', redirect: '/dashboard' },
+            { path: '/', redirect: '/dashboard/analysis' },
             { // 工作台
                 path: '/dashboard',
                 name: '工作台',
                 icon: 'dashboard',
+                routes: [
+                    {
+                        path: '/dashboard/analysis',
+                        component: './Dashboard/Analysis'
+                    }
+                ]
             },
             { // 订单中心
                 path: '/orders',
@@ -71,35 +77,35 @@ export default [
                     }
                 ]
             },
-            {
-                path: '/statistic-analysis',
-                name: '统计分析',
-                icon: 'dashboard',
-                component: './StatisticAnalyis'
-            },
+            // {  暂时不做
+            //     path: '/statistic-analysis',
+            //     name: '统计分析',
+            //     icon: 'dashboard',
+            //     component: './StatisticAnalyis'
+            // },
             // 帐户管理
-            {
-                name: '设置',
-                icon: 'setting',
-                path: '/settings',
-                routes: [
-                    {
-                        // 基本设置
-                        path: '/settings/basic',
-                        component: './Settings/Basic',
-                    },
-                    {
-                        // 帐户安全
-                        path: '/settiings/security',
-                        component: './Settings/Security',
-                    },
-                    {
-                        // 进货渠道
-                        path: '/settings/supply-channels',
-                        component: './Settings/SupplyChannels',
-                    }
-                ],
-            },
+            // {
+            //     name: '设置',
+            //     icon: 'setting',
+            //     path: '/settings',
+            //     routes: [
+            //         {
+            //             // 基本设置
+            //             path: '/settings/basic',
+            //             component: './Settings/Basic',
+            //         },
+            //         {
+            //             // 帐户安全
+            //             path: '/settiings/security',
+            //             component: './Settings/Security',
+            //         },
+            //         {
+            //             // 进货渠道
+            //             path: '/settings/supply-channels',
+            //             component: './Settings/SupplyChannels',
+            //         }
+            //     ],
+            // },
             // {
             //     component: '404',
             // },

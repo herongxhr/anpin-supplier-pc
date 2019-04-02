@@ -1,24 +1,22 @@
 import React, { Suspense } from 'react';
-import { Layout } from 'antd';
-import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { ContainerQuery } from 'react-container-query';
-import classNames from 'classnames';
-import Media from 'react-media';
-import logo from '../assets/logo.svg';
+import { Layout } from 'antd';
 import Footer from './Footer';
 import Header from './Header';
+import SiderMenu from '@/components/SiderMenu';
+import logo from '../assets/logo.svg';
+import classNames from 'classnames';
+import Media from 'react-media';
 import Context from './MenuContext';
 import PageLoading from '@/components/PageLoading';
-import SiderMenu from '@/components/SiderMenu';
+import DocumentTitle from 'react-document-title';
+import { ContainerQuery } from 'react-container-query';
 import getPageTitle from '@/utils/getPageTitle';
 import styles from './BasicLayout.less';
 
 // lazy load SettingDrawer
 //const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
-
 const { Content } = Layout;
-
 const query = {
     'screen-xs': {
         maxWidth: 575,
@@ -43,20 +41,16 @@ const query = {
         minWidth: 1600,
     },
 };
-
 class BasicLayout extends React.Component {
     componentDidMount() {
-        console.log(this.props);
         const {
             dispatch,
-            // umi会自动导入路由设置中的文件
-            // 并在加入到组件属性中中出现
             route: { routes, authority },
         } = this.props;
-        // dispatch({
-        //     // 获取当前用户信息
-        //     type: 'user/fetchCurrent',
-        // });
+        dispatch({
+            // 获取当前用户信息
+            type: 'user/fetchCurrent',
+        });
         // dispatch({
         // 获取配置，直接从本地获取，不用请求
         // 详见setting model文件
@@ -110,7 +104,8 @@ class BasicLayout extends React.Component {
     };
 
     render() {
-        const {
+        console.log(this.props);
+        const { // 大部分属性来自setting model
             navTheme,
             layout: PropsLayout,
             children,
@@ -125,6 +120,7 @@ class BasicLayout extends React.Component {
         const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
         const layout = (
             <Layout>
+                {/* 是否显示边栏菜单布局 */}
                 {isTop && !isMobile ? null : (
                     <SiderMenu
                         logo={logo}
@@ -151,7 +147,7 @@ class BasicLayout extends React.Component {
                     <Content className={styles.content} style={contentStyle}>
                         {children}
                     </Content>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Layout>
             </Layout>
         );

@@ -182,6 +182,30 @@ export function isAntdPro() {
   return window.location.hostname === 'preview.pro.ant.design';
 }
 
+/**
+ * 把毫秒的时间转化为年月日
+ * @param {number} dateTime 
+ */
+export function getYMD(dateTime) {
+  return dateTime && moment(dateTime).format('YYYY-MM-DD');
+}
+
+/**
+ * 把毫秒数转化为年月日24小时的时分秒
+ * @param {number} dateTime 
+ */
+export function getYMDHms(dateTime) {
+  return dateTime && moment(dateTime).format('YYYY-MM-DD');
+}
+
+/**
+ * 把毫秒数转化为周几
+ * @param {number} dateTime 
+ */
+export function getWeekday(dateTime) {
+  return dateTime && moment(dateTime).format('dddd');
+}
+
 export const importCDN = (url, name) =>
   new Promise(resolve => {
     const dom = document.createElement('script');
