@@ -8,10 +8,10 @@ export async function queryDeliveryData(params) {
   return request(`/workbench/distribution/listQuery`);
 }
 export async function queryOrdersProgress(params) {
-  return request(`/supplierworkbench/order/listQuery`);
+  return request(`/workbench/order/listQuery`);
 }
 export async function queryAddressBook(params) {
-  return request(`/supplier/workbench/catering/listQuery`);
+  return request(`/workbench/catering/listQuery`);
 }
 
 export async function queryRule(params) {

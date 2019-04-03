@@ -41,8 +41,8 @@ class Analysis extends Component {
     }
     componentDidMount() {
         this.getDeliverData();
-        // this.getOrdersProgress();
-        // this.getAddressBook();
+        this.getOrdersProgress();
+        this.getAddressBook();
     }
 
     componentWillUnmount() {
